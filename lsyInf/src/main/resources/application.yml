@@ -1,0 +1,44 @@
+server:
+  port: 8089
+spring:
+  jackson:
+    time-zone: GMT+8
+  datasource:
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+    url: jdbc:oracle:thin:@10.0.11.83:1545/srm.weichai.com
+    username: lisongyue
+    password: lisongyue
+#      url: jdbc:oracle:thin:@10.0.8.139:1521/srmtestdb.weichai.com
+#    username: practice
+#    password: practice
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:mapper/*/*.xml
+  typeAliasesPackage: com.staff.demo.entity
+  check-config-location: true
+  configuration:
+    #�Ƿ����Զ��շ���������camel case��ӳ��
+    map-underscore-to-camel-case: true
+    #ȫ�ֵؿ�����ر������ļ��е�����ӳ�����Ѿ����õ��κλ���
+    cache-enabled: false
+    call-setters-on-nulls: true
+    #����JdbcTypeForNull, oracle���ݿ��������
+    jdbc-type-for-null: 'null'
+    #MyBatis �Զ�ӳ��ʱδ֪�л�δ֪���Դ������ NONE�������κδ��� (Ĭ��ֵ), WARNING������־����ʽ��ӡ��ؾ�����Ϣ, FAILING������ӳ��ʧ�ܴ������׳��쳣����ϸ��Ϣ
+    auto-mapping-unknown-column-behavior: warning
+  global-config:
+    banner: false
+    db-config:
+      #��������  0:"���ݿ�ID����", 1:"δ������������",2:"�û�����ID (�����Ϳ���ͨ���Լ�ע���Զ�������������)", 3:"ȫ��ΨһID (idWorker), 4:ȫ��ΨһID (UUID), 5:�ַ���ȫ��ΨһID (idWorker ���ַ�����ʾ)";
+      id-type: UUID
+      #�ֶ���֤���� IGNORED:"�����ж�", NOT_NULL:"��NULL�ж�", NOT_EMPTY:"�ǿ��ж�", DEFAULT Ĭ�ϵ�,һ��ֻ����ע����(1. ��ȫ������� NOT_NULL,2. ��ע������� ����ȫ��)
+      field-strategy: NOT_EMPTY
+      #���ݿ��д�»���ת��
+      capital-mode: true
+      #�߼�ɾ��ֵ
+      logic-delete-value: 1
+      #�߼�δɾ��ֵ
+      logic-not-delete-value: 0
+

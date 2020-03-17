@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.staff.demo.mapper.StaffMapper">
+
+    <!--    <select id="getAllStaff" resultType="com.staff.demo.entity.Staff">-->
+    <!--        select * from inf_lsy-->
+    <!--        order by id desc-->
+    <!--    </select>-->
+    <select id="getTableByPage" resultType="com.staff.demo.entity.Staff">
+        select * from inf_lsy where 1 = 1
+    </select>
+    <!--    order by id desc-->
+    <!--    order by cast(id as integer)-->
+    <!--    flushCache="true"-->
+    <select id="findStaff" parameterType="int" resultType="com.staff.demo.entity.Staff">
+        <choose>
+            <when test="params.id !=null and params.id.trim() !=''">
+                select * from inf_lsy where id = #{params.id}
+            </when>
+            <otherwise>
+                select * from inf_lsy where 1 = 1
+            </otherwise>
+        </choose>
+    </select>
+    <!--    <select id="findStaff" parameterType="int" resultType="com.staff.demo.entity.Staff">-->
+    <!--        <choose>-->
+    <!--            <when test="params.id !=null and params.id.trim() !=''">-->
+    <!--                select * from inf_lsy where id = #{params.id}-->
+    <!--                and staffName like concat(concat('%',#{params.staffName}), '%')-->
+    <!--            </when>-->
+    <!--            <otherwise>-->
+    <!--                select * from inf_lsy where 1 = 1-->
+    <!--            </otherwise>-->
+    <!--        </choose>-->
+    <!--    </select>-->
+    <!--    <select id="findByName" parameterType="int" resultType="com.staff.demo.entity.Staff">-->
+    <!--        select * from inf_lsy-->
+    <!--        <where>-->
+    <!--            <if test="staffName != null and staffName !=''">-->
+    <!--                and staffName like concat(concat('%',#{staffName},'%'))-->
+    <!--            </if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="findByName" resultType="com.staff.demo.entity.Staff">
+        select * from inf_lsy where 1 = 1
+        <choose>
+            <when test="params.staffName !=null and params.staffName.trim() !=''">
+                and staffName like concat(concat('%',#{params.staffName}), '%')
+            </when>
+
+        </choose>
+    </select>
+    <insert id="saveStaff" parameterType="com.staff.demo.entity.Staff">
+        insert into inf_lsy(department, office, id, staffName, sex, entryDate, address, phoneNumber)
+        values(#{params.department}, #{params.office}, #{params.id}, #{params.staffName}, #{params.sex},
+        to_date(#{params.entryDate},'yyyy-MM-dd'), #{params.address}, #{params.phoneNumber})
+    </insert>
+
+    <select id="saveOffice" resultType="com.staff.demo.entity.StaffOffice">
+        select * from office_master where 1 = 1
+    </select>
+
+    <insert id="addStaff" parameterType="com.staff.demo.entity.Staff">
+        insert into inf_lsy(department, office, id, staffName, sex, entryDate, address, phoneNumber)
+        values(#{params.department}, #{params.office}, #{params.id}, #{params.staffName}, #{params.sex},
+        to_date(#{params.entryDate},'yyyy-MM-dd'), #{params.address}, #{params.phoneNumber})
+    </insert>
+    <!--    <insert id="addStaff" parameterType="com.example.lsy.entity.Book">-->
+    <!--        insert into inf_lsy(department, office, id, staffName, sex, entryDate, address, phoneNumber) values(#{params.department}, #{params.office}, #{params.id}, #{params.staffName}, #{params.sex}, #{params.entryDate}, #{params.address}, #{params.phoneNumber},)-->
+    <!--    </insert>-->
+    <update id="updateStaff">
+        update inf_lsy set department = #{params.department}, office = #{params.office}, staffName =
+        #{params.staffName}, sex = #{params.sex}, entryDate = to_date(#{params.entryDate},'yyyy-MM-dd'), address =
+        #{params.address}, phoneNumber = #{params.phoneNumber}
+        where id = #{params.id}
+    </update>
+
+    <delete id="deleteStaff">
+        delete from inf_lsy where id = #{params.id}
+    </delete>
+    <!--    <select id="findStaff" parameterType="int" resultType="com.example.lsy.entity.Book">-->
+    <!--        <choose>-->
+    <!--            <when test="params.id !=null and params.id.trim() !=''">-->
+    <!--                select * from inf_lsy where id = #{params.id}-->
+    <!--            </when>-->
+    <!--            <otherwise>-->
+    <!--                select * from inf_lsy-->
+    <!--            </otherwise>-->
+    <!--        </choose>-->
+    <!--    </select>-->
+
+    <!--    <select id="getTableByPage" resultType="com.example.lsy.entity.Book">-->
+    <!--        select * from book-->
+    <!--    </select>-->
+
+</mapper>
