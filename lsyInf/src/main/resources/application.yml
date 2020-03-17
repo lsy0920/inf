@@ -7,12 +7,10 @@ spring:
     driverClassName: oracle.jdbc.driver.OracleDriver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-    url: jdbc:oracle:thin:@10.0.11.83:1545/srm.weichai.com
-    username: lisongyue
-    password: lisongyue
-#      url: jdbc:oracle:thin:@10.0.8.139:1521/srmtestdb.weichai.com
-#    username: practice
-#    password: practice
+    url: 
+    username: 
+    password: 
+
 #mybatis
 mybatis-plus:
   mapper-locations: classpath:mapper/*/*.xml
